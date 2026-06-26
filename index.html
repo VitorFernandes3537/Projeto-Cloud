@@ -56,7 +56,7 @@
   <main>
     <h1>Olá, Nuvem</h1>
     <p id="status">Carregando a resposta do servidor...</p>
-    <button id="btn">Buscar de novo</button>
+    <p id="frase">Carregando frase do dia DEV...</p>
     <button id="btn">Buscar de novo</button>
   </main>
 
@@ -67,11 +67,13 @@
 
     async function buscar() {
       const status = document.getElementById("status");
+      const frase = document.getElementById("frase")
       status.textContent = "Buscando...";
       try {
         const resposta = await fetch(URL_DO_WORKER);
         const dados = await resposta.json();
         status.textContent = dados.mensagem + " Hora do servidor: " + dados.horaDoServidor;
+        frase.textContent = dados.fraseDoDia;
       } catch (erro) {
         status.textContent = "Não consegui falar com o Worker. Confira a URL.";
       }
